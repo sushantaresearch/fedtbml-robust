@@ -11,9 +11,14 @@ Maps onto fed_core's local_train(dp={'clip': C, 'noise_mult': sigma}):
   - sample_rate      = batch_size / n_local      (Poisson sampling rate q)
   - steps            = local_epochs * (n_local / batch_size) * federation_rounds
 
-Note: per-client DP composes over that client's own steps; with secure
-aggregation the server never sees individual updates, so the client-level
-guarantee is what each jurisdiction can certify to its own regulator.
+Privacy unit: this computes an EXAMPLE-LEVEL (record-level) DP guarantee for each
+client's local training. Per-example gradients are clipped and the Gaussian
+mechanism is applied under Poisson subsampling, composed over that client's own
+steps — i.e. the guarantee protects individual records within a client's local
+dataset, which is the example-level guarantee reported in the paper. (Client-level
+/ user-level DP, or DP combined with secure aggregation, would be a different and
+generally stronger unit of privacy; that is a deployment option, not what is
+accounted here.)
 
     pip install dp-accounting
 """
@@ -47,7 +52,7 @@ def steps_from_config(n_local: int, batch_size: int, local_epochs: int,
 
 
 def budget_table(sample_rate: float, steps: int, delta: float = 1e-5,
-                 sigmas=(0.5, 0.8, 1.0, 1.5, 2.0)) -> None:
+                 sigmas=(0.5, 0.8, 1.0, 1.5, 2.0, 4.0)) -> None:
     print(f"  q (sample rate) = {sample_rate:.4f}   steps = {steps}   delta = {delta}")
     print(f"  {'sigma':>6} | {'epsilon':>10}")
     print(f"  {'-'*6}-+-{'-'*10}")
@@ -58,11 +63,12 @@ def budget_table(sample_rate: float, steps: int, delta: float = 1e-5,
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser(description="DP-SGD privacy accountant for FedTBML")
-    ap.add_argument("--n-local", type=int, default=2800,
-                    help="local TRAIN examples per client (after 70/30 split)")
+    ap.add_argument("--n-local", type=int, default=2100,
+                    help="local TRAIN examples per client (after 70/30 split; "
+                         "2100 = 70%% of 3000, the tabular benchmark default)")
     ap.add_argument("--batch-size", type=int, default=256)
     ap.add_argument("--local-epochs", type=int, default=3)
-    ap.add_argument("--rounds", type=int, default=10)
+    ap.add_argument("--rounds", type=int, default=8)
     ap.add_argument("--delta", type=float, default=1e-5)
     a = ap.parse_args()
 
