@@ -1,0 +1,172 @@
+{
+  "description": "Frozen canonical synthetic datasets for FedTBML-Robust.",
+  "generator": "synth_trade.py (numpy.random.default_rng / PCG64)",
+  "note": "default_rng is not guaranteed bit-stable across numpy versions; these frozen files define the benchmark. Reproduce with the pinned requirements and verify against the sha256 sums below.",
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "files": {
+    "tabular_frontier.csv.gz": {
+      "generator": "generate",
+      "params": {
+        "n_clients": 8,
+        "n_per_client": 3000,
+        "heterogeneity": 1.0
+      },
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "rows": 240000,
+      "columns": [
+        "seed",
+        "client_id",
+        "hs6",
+        "fair_value",
+        "declared_unit_value",
+        "quantity",
+        "weight",
+        "label",
+        "hs6_median",
+        "dev_from_hs6_median",
+        "abs_dev_from_hs6_median",
+        "log_declared_unit_value",
+        "log_quantity",
+        "log_weight",
+        "value_per_kg_z",
+        "value_per_unit_z"
+      ],
+      "label_column": "label",
+      "positive_rate": 0.0342,
+      "sha256": "bf2a8ee065ea0710e28f23d42c35cbc5d9c388b2ecf83c7e804ea07ca170cd60"
+    },
+    "relational_cells.csv.gz": {
+      "generator": "generate_relational",
+      "params": {
+        "n_clients": 6,
+        "n_per_client": 700,
+        "n_rings": 12,
+        "ring_size": 5,
+        "laundering_rate": 0.015,
+        "cells_(relational_strength,entity_overlap)": [
+          [
+            0.0,
+            0.5
+          ],
+          [
+            0.5,
+            0.5
+          ],
+          [
+            1.0,
+            0.0
+          ],
+          [
+            1.0,
+            0.5
+          ],
+          [
+            1.0,
+            1.0
+          ]
+        ]
+      },
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "rows": 210000,
+      "columns": [
+        "relational_strength",
+        "entity_overlap",
+        "seed",
+        "client_id",
+        "importer",
+        "exporter",
+        "hs6",
+        "fair_value",
+        "declared_unit_value",
+        "quantity",
+        "weight",
+        "label",
+        "hs6_median",
+        "dev_from_hs6_median",
+        "abs_dev_from_hs6_median",
+        "log_declared_unit_value",
+        "log_quantity",
+        "log_weight",
+        "value_per_kg_z",
+        "value_per_unit_z"
+      ],
+      "label_column": "label",
+      "positive_rate_overall": 0.014286,
+      "positive_rate_per_cell": {
+        "rs=0.0,ov=0.5": 0.014286,
+        "rs=0.5,ov=0.5": 0.014286,
+        "rs=1.0,ov=0.0": 0.014286,
+        "rs=1.0,ov=0.5": 0.014286,
+        "rs=1.0,ov=1.0": 0.014286
+      },
+      "sha256": "acb944926d0f9332381dc9fa934d3f3a09eb85c4270b1f2542b388a331b174ed"
+    },
+    "relational_graph_rs1_ov0p5_seed0.npz": {
+      "generator": "generate_relational + build_graph",
+      "params": {
+        "relational_strength": 1.0,
+        "entity_overlap": 0.5,
+        "seed": 0,
+        "max_degree_per_entity": 6
+      },
+      "arrays": {
+        "X": [
+          4200,
+          7
+        ],
+        "edge_index": [
+          2,
+          70928
+        ],
+        "y": [
+          4200
+        ]
+      },
+      "n_features": 7,
+      "features": [
+        "log_declared_unit_value",
+        "dev_from_hs6_median",
+        "abs_dev_from_hs6_median",
+        "log_quantity",
+        "log_weight",
+        "value_per_kg_z",
+        "value_per_unit_z"
+      ],
+      "positive_rate": 0.014286,
+      "sha256": "c8dbefa0e0a337395c93f13feba7fa89bca368c870653dfc601754516aa00c8a"
+    }
+  }
+}
