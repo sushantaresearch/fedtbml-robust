@@ -1,0 +1,31 @@
+cff-version: 1.2.0
+message: "If you use FedTBML-Robust, please cite the paper below."
+title: "FedTBML-Robust: A Benchmark for Byzantine-Robust Federated Trade-Based Money-Laundering Detection under Strategic Poisoning"
+type: software
+authors:
+  - family-names: Paul
+    given-names: Sushanta
+    orcid: "https://orcid.org/0009-0007-8071-6971"
+    affiliation: "National Board of Revenue, Customs, Excise and VAT Wing, Dhaka, Bangladesh"
+version: "1.0.0"
+date-released: "2026-01-01"   # TODO: set to the Zenodo release date
+# doi: 10.5281/zenodo.XXXXXXX   # TODO: add the Zenodo archive DOI after release
+license: MIT
+repository-code: "https://github.com/<TODO>"   # TODO: set on release
+keywords:
+  - federated learning
+  - trade-based money laundering
+  - Byzantine robustness
+  - adversarial poisoning
+  - differential privacy
+  - benchmark
+preferred-citation:
+  type: article
+  title: "A Benchmark for Byzantine-Robust Federated Trade-Based Money-Laundering Detection under Strategic Poisoning"
+  authors:
+    - family-names: Paul
+      given-names: Sushanta
+      orcid: "https://orcid.org/0009-0007-8071-6971"
+  journal: "Machine Learning (Springer)"
+  year: 2026
+  notes: "Under review; special issue on Advances in Federated Learning for Critical Applications."

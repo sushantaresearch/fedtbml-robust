@@ -1,0 +1,19 @@
+# FedTBML-Robust — Python 3.12
+# Pinned to the versions used to produce the reported results (10-seed CIs).
+# Core (synth_trade.py, fed_core.py, benchmark.py, dp_accountant.py, phase1.py):
+numpy==2.4.4
+pandas==3.0.2          # note: a DataFrame column literally named "agg" must be
+                       # accessed as df["agg"] (it collides with DataFrame.agg);
+                       # the harness already does this.
+scipy==1.17.1
+scikit-learn==1.8.0
+matplotlib==3.10.8
+dp-accounting           # Renyi accountant for the Poisson-subsampled Gaussian mechanism
+
+# GNN reference system (gnn_ref.py) — CPU PyTorch is sufficient:
+torch==2.12.0
+
+# Production / optional (flower_gnn.py, real UN Comtrade pull) — uncomment if needed:
+# torch-geometric
+# flwr[simulation]
+# comtradeapicall
